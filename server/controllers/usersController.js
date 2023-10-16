@@ -1,6 +1,6 @@
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
-
+//controller tells what to do with data coming from front-end
 
 
 module.exports.register = async (req,res,next) => { //in this 'req' data is coming from front end when we did post request
@@ -23,6 +23,24 @@ module.exports.register = async (req,res,next) => { //in this 'req' data is comi
             password: hashedPassword, //in User schema, the encrypted password is stored 
         });
         delete user.password; //we deleted the unencrypted password
+        return res.json({status: true, user});
+    } catch (err){
+        next(err);
+    }
+}; 
+
+module.exports.login = async (req,res,next) => { //in this 'req' data is coming from front end when we did post request
+    try{
+        const { username, password } = req.body;
+
+        const user = await User.findOne({ username });//checking if this user is present
+        if(!user)
+            return res.json({msg: "Incorrect username or password", status: false });
+
+        const isPasswordValid = await bcrypt.compare(password, user.password)
+        if( !isPasswordValid )
+            return res.json({msg: "Incorrect username or password", status: false})
+                
         return res.json({status: true, user});
     } catch (err){
         next(err);
