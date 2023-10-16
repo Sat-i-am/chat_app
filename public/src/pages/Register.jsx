@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components"
 import logo from"../assets/logo.svg"
 import {ToastContainer, toast} from "react-toastify"
@@ -9,28 +9,38 @@ import { registerRoute } from '../utils/APIRoutes';
 
 
 function Register() {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "", 
   });
+
   const handleSubmit = async (event) => {
     event.preventDefault(); //to prevent default behaviour i.e. page refresh
     if(handleValidation()){ //to validate the passwords
       console.log("in validation", registerRoute)
-      const {password, confirmPassword, username, email} = values;
+      const {password, username, email} = values;
       const {data} = await axios.post( registerRoute, {//so it will wait for the post request to be completed
         username,
         email,
         password,
         //now these 3 opbjects as posted to registerRoute, whose route will match with our server route and hence data is transferred to backend server
       }); //the response from the server will be stored in data variable
+      if(data.status === false){
+        toast.error(data.msg, toastOptions);
+      }
+      else {
+        localStorage.setItem('chat-app-user', JSON.stringify(data.user));
+        navigate("/"); //if user is successfully registered then navigating it to home 
+      }
     }
     else {
       alert("handlevalidation is not proper")
     };
   }
+
   const handleValidation = () => {
     const {password, confirmPassword, username, email } = values; //i.e. we destructured all the values here
     if (password !== confirmPassword){
@@ -54,6 +64,7 @@ function Register() {
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value});
   };
+
   const toastOptions = {
     position: "bottom-right",
     autoClose: 5000,
@@ -61,6 +72,7 @@ function Register() {
     draggable: true,
     theme: "dark",
   };
+
   return (
     <>
       <FormContainer>
