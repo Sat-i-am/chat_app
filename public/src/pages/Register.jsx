@@ -5,19 +5,30 @@ import logo from"../assets/logo.svg"
 import {ToastContainer, toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css" //defining css for toast (necessary)
 import axios from "axios";
+import { registerRoute } from '../utils/APIRoutes';
+
 
 function Register() {
   const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: "", 
   });
   const handleSubmit = async (event) => {
     event.preventDefault(); //to prevent default behaviour i.e. page refresh
     if(handleValidation()){ //to validate the passwords
+      console.log("in validation", registerRoute)
       const {password, confirmPassword, username, email} = values;
-      const {data} = await axios.post(); //so it will wait for the post request to be completed
+      const {data} = await axios.post( registerRoute, {//so it will wait for the post request to be completed
+        username,
+        email,
+        password,
+        //now these 3 opbjects as posted to registerRoute, whose route will match with our server route and hence data is transferred to backend server
+      }); //the response from the server will be stored in data variable
+    }
+    else {
+      alert("handlevalidation is not proper")
     };
   }
   const handleValidation = () => {
@@ -35,7 +46,9 @@ function Register() {
         return false;
     } else if(email === "") {
       toast.error("Email is required.",toastOptions);
+      return false;
     }
+    return true;
   }
   
   const handleChange = (event) => {
