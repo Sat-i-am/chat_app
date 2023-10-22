@@ -46,3 +46,23 @@ module.exports.login = async (req,res,next) => { //in this 'req' data is coming 
         next(err);
     }
 }; 
+module.exports.setAvatar = async (req, res, next)=>{ //this defines what backend does when we enter setAvatar route 
+    console.log(`this is the request from front end ${req}`);
+    
+    try{ 
+        const userId = req.params.id;
+        const avatarImage = req.body.image;
+        const userData = await User.findByIdAndUpdate(userId, {
+            isAvatarImageSet: true,
+            avatarImage,
+        })
+        console.log(userData);
+        return res.json({
+            isSet:userData.isAvatarImageSet,
+            image:userData.avatarImage
+        })
+    } catch( err ){
+        console.log("here is error")
+        next(err);
+    }
+}
