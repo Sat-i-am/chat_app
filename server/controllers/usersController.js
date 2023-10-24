@@ -56,13 +56,30 @@ module.exports.setAvatar = async (req, res, next)=>{ //this defines what backend
             isAvatarImageSet: true,
             avatarImage,
         })
-        console.log(userData);
+        //console.log(userData);
         return res.json({
             isSet:userData.isAvatarImageSet,
             image:userData.avatarImage
         })
     } catch( err ){
         console.log("here is error")
+        next(err);
+    }
+}
+
+module.exports.getAllUsers = async(req,res,next) => {
+    try{
+        const users = await User.find({_id: { $ne: req.params.id} }).select([
+       // const users = await User.find({ _id: { $ne: req.params.id } }).select([    
+            "email",
+            "username",
+            "avatarImage",
+            "_id",
+        ]);
+        // console.log(users);
+        return res.json(users);
+    } catch (err) {
+        console.log("there is error");
         next(err);
     }
 }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components"
 
+
 import {ToastContainer, toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css" //defining css for toast (necessary)
 import axios from "axios";
@@ -81,6 +82,7 @@ export default function SetAvatar() {
                   className="avatarLogo"
                 />
                 </div>
+                
               ))}
             
           </div>
@@ -147,9 +149,6 @@ width: 100vw;
     transition: 0.2s ease-in-out;
     &:hover {
       background-color: #4e0eff;
-    
   }
 }
-
-
 `;
