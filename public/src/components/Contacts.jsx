@@ -17,7 +17,7 @@
     
     const changeCurrentChat = (index, contact) => {
         setCurrentSelected(index);
-
+        changeChat(contact); //so currentChat holds details of person we are chatting with
     };
     
     return (

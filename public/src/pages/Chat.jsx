@@ -5,22 +5,23 @@ import { useNavigate } from 'react-router-dom';
 import { allUsersRoute } from '../utils/APIRoutes';
 import Contacts from '../components/Contacts';
 import Welcome from '../components/Welcome';
+import ChatContainer from '../components/ChatContainer';
 
 function Chat() {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
+  const [isLoaded, setisLoaded] = useState(false);
   useEffect(() => {
     if(!localStorage.getItem('chat-app-user')){
       navigate('/login');
     } else {
       setCurrentUser(JSON.parse(localStorage.getItem("chat-app-user")));
+      setisLoaded(true); //gets true when current user is loaded
     }
   },[]) 
-  // useEffect(() => {
-  //   console.log(contacts);
-  // },[contacts]); //this was to check if all users were successfully fetched into contacts
+  
   useEffect(() => {
     if(currentUser) {
       //console.log(currentUser);
@@ -28,9 +29,8 @@ function Chat() {
         try{
           async function fetchData(){
             const response = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-            //console.log(response.data);
             setContacts(response.data);  //so we have all the users in contacts
-            //console.log(contacts);
+            
           }
           fetchData();
         } catch(err){
@@ -47,7 +47,19 @@ function Chat() {
   return (
     <Container>
       <div className='container'>
-        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange}/>
+        <Contacts
+         contacts={contacts}
+         currentUser={currentUser} 
+         changeChat={handleChatChange}
+        />
+        
+        { //loading Welcome component if we haven't selected any user to chat with and if we have selected then showing ChatContainer component
+          isLoaded && currentChat === undefined ? (
+          <Welcome currentUser={currentUser} />
+          ) : (
+            <ChatContainer currentChat={currentChat} />
+          )
+        }
       </div>
     </Container>
   );
