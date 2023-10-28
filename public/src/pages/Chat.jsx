@@ -44,6 +44,7 @@ function Chat() {
   const handleChatChange = (chat) =>{
     setCurrentChat(chat);
   }
+
   return (
     <Container>
       <div className='container'>
@@ -57,7 +58,8 @@ function Chat() {
           isLoaded && currentChat === undefined ? (
           <Welcome currentUser={currentUser} />
           ) : (
-            <ChatContainer currentChat={currentChat} />
+            
+            <ChatContainer currentChat={currentChat} currentUser={currentUser} />
           )
         }
       </div>

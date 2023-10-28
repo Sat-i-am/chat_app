@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export default function Messages() {
   return (
-    <div>Messages</div>
+    <Container>Messages</Container>
   )
 }
 const Container =  styled.div`

@@ -109,7 +109,6 @@ width: 100%;
     background-color: #ffffff34;
     input{
         width: 90%;
-        height: 60%;
         background-color: transparent;
         color: white;
         border: none;
