@@ -58,6 +58,10 @@ padding-bottom: 0.3rem;
 position: absolute;
 bottom: 0;
 width: 100%;
+@media screen and (min-width: 720px) and (max-width: 1080px){
+    padding: 0 1rem;
+    gap: 1rem;
+  }
 .button-container{
     display: flex;
     align-items: center;
@@ -129,6 +133,12 @@ width: 100%;
         justify-content: center;
         align-items: center;
         border: none;
+        @media screen and (min-width: 720px) and (max-width: 1080px){
+            padding: 0.3rem 1rem;
+            svg{
+                font-size: 1rem;
+            }
+        }
         svg{
             font-size: 2rem;
             color: white;
