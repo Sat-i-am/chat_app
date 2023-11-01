@@ -1,0 +1,50 @@
+			Code Flow Summary:
+
+1. Frontend:
+   - The frontend of the project is built using **React**. It includes several components for different pages and functionalities, such as `Register`, `Login`, `Chat`, and `SetAvatar`.
+   - **React Router** is used for handling navigation between different pages.
+
+2.Authentication:
+   - The project implements user authentication with features like registration and login. 
+   - When a user registers or logs in, their data (username, email, hashed password) is sent to the backend for validation and storage.
+
+3. Avatar Selection:
+   - After a user logs in, they are directed to a page where they can select an avatar as their profile picture. This is done using the `SetAvatar` component.
+
+4. Backend:
+   - The backend is built using **Node.js** with **Express.js** as the web application framework.
+   - **Mongoose** is used as the ODM (Object-Document Mapper) for MongoDB, which provides a way to interact with the database.
+
+5. Database:
+   - The project uses a **MongoDB** database to store user information and messages.
+   - There are two schemas defined: one for users and one for messages.
+
+6. User Management:
+   - The backend handles user registration and login. It checks if the username and email are unique before creating a new user.
+   - Passwords are hashed using **bcrypt** before being stored in the database for security.
+
+7. Real-time Messaging:
+   - The project implements real-time messaging using **Socket.IO**. This allows for instant communication between users without the need for constant polling.
+   - When a user sends a message, it is emitted to the recipient in real-time.
+
+8. Socket.IO Events:
+   - When a new user connects, their socket is stored in a global variable (`chatSocket`). 
+   - Users can be added to an online users map, which associates their user ID with their socket ID.
+   - Messages are sent from one user to another using their respective socket IDs.
+
+9. Routes:
+   - The backend defines several routes for handling user authentication, messages, and avatar setting.
+
+10. Environment Variables:
+    - **dotenv** is used to load environment variables, such as the MongoDB URL and server port.
+
+11. Error Handling:
+    - The backend includes basic error handling with try-catch blocks to catch and handle exceptions.
+
+12. Project Structure:
+    - The project is organized into files and folders for models, routes, and main server setup.
+
+13. Package Management:
+    - **npm** is likely used for managing dependencies and scripts.
+
+
