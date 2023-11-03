@@ -29,7 +29,7 @@
 
     const io = socket(server,{
         cors:{
-            origin: "http://localhost:3000",
+            origin: "https://letschat-b7xm.onrender.com/",
             credentials: true,
         },
     });
