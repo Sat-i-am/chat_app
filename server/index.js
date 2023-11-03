@@ -29,8 +29,7 @@
 
     const io = socket(server,{
         cors:{
-            origin: "https://letschat-b7xm.onrender.com/",
-            credentials: true,
+            origin: "*",
         },
     });
     global.onlineUsers = new Map();
