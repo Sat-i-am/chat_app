@@ -9,10 +9,10 @@ import "react-toastify/dist/ReactToastify.css" //defining css for toast (necessa
 import axios from "axios";
 import { setAvatarRoute } from '../utils/APIRoutes';
 
-import logo1 from "../assets/avatarLogo/logo1.jpeg"
-import logo2 from "../assets/avatarLogo/logo2.jpeg"
-import logo3 from "../assets/avatarLogo/logo3.jpeg"
-import logo4 from "../assets/avatarLogo/logo4.jpeg"
+import logo1 from "../assets/avatarLogo/logo1.png"
+import logo2 from "../assets/avatarLogo/logo2.png"
+import logo3 from "../assets/avatarLogo/logo3.png"
+import logo4 from "../assets/avatarLogo/logo4.png"
 
  
 
